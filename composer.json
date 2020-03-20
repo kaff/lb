@@ -1,0 +1,20 @@
+{
+    "require": {
+        "psr/http-message": "^1.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^6.1",
+        "phpunit/phpunit": "^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\": "tests/spec/",
+            "integration\\": "tests/integration/"
+        }
+    }
+}

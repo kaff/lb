@@ -1,0 +1,17 @@
+version: '3'
+services:
+  php:
+    build:
+      context: .
+      dockerfile: 'dockerfile'
+    env_file:
+      - docker-compose.env
+    environment:
+      SSH_AUTH_SOCK: /tmp/ssh-agent.sock
+      PHP_EXT_XDEBUG: 'True'
+      TERM: xterm-color
+    volumes:
+      - ./:/var/www/app/
+      - ${SSH_AUTH_SOCK}:/tmp/ssh-agent.sock
+    working_dir: /var/www/app/
+    hostname: php-serv

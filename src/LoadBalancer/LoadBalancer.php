@@ -10,10 +10,13 @@ class LoadBalancer
 {
     private BalancingAlgorithm $balancingAlgorithm;
 
-    public function __construct(Hosts $hosts, BalancingAlgorithm $balancingAlgorithm)
+    public function __construct(Hosts $hosts, string $balancingAlgorithm)
     {
-        $this->balancingAlgorithm = $balancingAlgorithm;
-        $this->balancingAlgorithm->addHosts($hosts);
+        if (class_implements($balancingAlgorithm) === BalancingAlgorithm::class) {
+            throw new \Exception('Balancing Algorithm must implement BalancingAlgorithm interface');
+        }
+
+        $this->balancingAlgorithm = new $balancingAlgorithm($hosts);
     }
 
     public function handleRequest(Request $request): void {

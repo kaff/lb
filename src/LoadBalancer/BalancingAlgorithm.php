@@ -6,6 +6,4 @@ namespace LoadBalancer;
 
 interface BalancingAlgorithm {
     public function getHost(): Host;
-
-    public function addHosts(Hosts $hosts): void;
 }

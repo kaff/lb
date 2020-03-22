@@ -27,3 +27,20 @@ to run all test
 ```
 docker-compose exec php bash -c "vendor/bin/phpunit && vendor/bin/phpspec run"
 ```
+# Usage example
+
+```php
+use LoadBalancer\Host;
+use LoadBalancer\Hosts;
+use LoadBalancer\LoadBalancer;
+use Network\IPv4;
+
+$loadBalancer = new LoadBalancer(
+    new Hosts(
+        new Host(new IPv4('192.168.1.1')),
+        new Host(new IPv4('192.168.1.2')),
+        new Host(new IPv4('192.168.1.3'))
+), new BalancingAlgorithm\NextInLoop());
+
+$loadBalancer->handleRequest($request);
+```

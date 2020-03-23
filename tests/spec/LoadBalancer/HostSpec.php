@@ -3,6 +3,7 @@
 namespace spec\LoadBalancer;
 
 use Network\IPv4;
+use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\Exception\Example\PendingException;
 use PhpSpec\ObjectBehavior;
 use Psr\Http\Message\RequestInterface;
@@ -26,7 +27,7 @@ class HostSpec extends ObjectBehavior
         throw new PendingException();
     }
 
-    function it_returns_null_microtime_of_handling_last_request_when_there_was_not_any_request_handled_yet()
+    function it_returns_nullable_microtime_of_handling_last_request_when_there_was_not_any_request_handled_yet()
     {
         $this->getMicrotimeOfHandlingLastRequest()->shouldBe(null);
     }    

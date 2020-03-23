@@ -8,8 +8,8 @@ use LoadBalancer\BalancingAlgorithm;
 use LoadBalancer\Host;
 use LoadBalancer\Hosts;
 use LoadBalancer\LoadBalancer;
-use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
+use PHPUnit\Framework\TestCase;
 
 class LoadBalancer_LoadUnderFactorTest extends TestCase
 {

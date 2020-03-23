@@ -6,6 +6,9 @@ namespace LoadBalancer;
 
 class Hosts
 {
+    /**
+     * @var Host[]
+     */
     private array $hosts;
 
     public function __construct(Host ...$hosts)

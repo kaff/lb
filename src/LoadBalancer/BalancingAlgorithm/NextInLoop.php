@@ -20,7 +20,7 @@ class NextInLoop implements BalancingAlgorithm {
 
         $sortedArray = $this->sortByMicrotimeOfSendingLastRequest($hostsArray);
 
-        return $sortedArray[0];
+        return reset($sortedArray);
     }
 
     private function sortByMicrotimeOfSendingLastRequest(array $hosts): array

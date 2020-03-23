@@ -18,18 +18,21 @@ class LoadUnderFactor implements BalancingAlgorithm {
     }
 
     public function chooseHost(Hosts $hosts): Host {
-        $hostBelowFactor = $this->getFirstHostWithLoadUnderFactor($hosts);
+        $hostsArray = $hosts->toArray();
+
+        $hostBelowFactor = $this->getFirstHostWithLoadUnderFactor($hostsArray);
 
         if ($hostBelowFactor instanceof Host) {
             return $hostBelowFactor;
         }
 
-        return $this->getHostWithTheLowestLoad($hosts);
+        return $this->getHostWithTheLowestLoad($hostsArray);
     }
 
-    private function getFirstHostWithLoadUnderFactor(Hosts $hosts): ?Host
+    private function getFirstHostWithLoadUnderFactor(array $hosts): ?Host
     {
-        foreach ($hosts->toArray() as $host) {
+        foreach ($hosts as $host) {
+            /** @var Host $host  */
             if ($host->getLoad() < $this->loadFactor) {
                 return $host;
             }
@@ -38,13 +41,12 @@ class LoadUnderFactor implements BalancingAlgorithm {
         return null;
     }
 
-    private function getHostWithTheLowestLoad(Hosts $hosts): Host
+    private function getHostWithTheLowestLoad(array $hosts): Host
     {
-        $hostsArray = $hosts->toArray();
-        usort($hostsArray, function (Host $hostA, Host $hostB) {
+        usort($hosts, function (Host $hostA, Host $hostB) {
             return $hostA->getLoad() <=> $hostB->getLoad();
         });
 
-        return reset($hostsArray);
+        return reset($hosts);
     }
 }

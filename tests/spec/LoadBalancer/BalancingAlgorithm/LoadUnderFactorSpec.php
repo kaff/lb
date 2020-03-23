@@ -26,8 +26,8 @@ class LoadUnderFactorSpec extends ObjectBehavior
         Host $host3
     ) {
         $host1->getLoad()->willReturn(self::LOAD_ABOVE_FACTOR);
-        $host1->getLoad()->willReturn(self::FIRST_LOAD_UNDER_FACTOR);
-        $host1->getLoad()->willReturn(self::SECOND_LOAD_UNDER_FACTOR);
+        $host2->getLoad()->willReturn(self::FIRST_LOAD_UNDER_FACTOR);
+        $host3->getLoad()->willReturn(self::SECOND_LOAD_UNDER_FACTOR);
 
         $hosts = new Hosts(
             $host1->getWrappedObject(),
@@ -36,7 +36,7 @@ class LoadUnderFactorSpec extends ObjectBehavior
         );
 
         $host = $this->chooseHost($hosts);
-        $host->getLoad()->shouldBe(self::FIRST_LOAD_UNDER_FACTOR);
+        $host->shouldBe($host2);
     }
 
     function it_returns_host_with_the_lowest_load_when_all_hosts_are_above_given_factor(
@@ -55,6 +55,6 @@ class LoadUnderFactorSpec extends ObjectBehavior
         );
 
         $host = $this->chooseHost($hosts);
-        $host->getLoad()->shouldBe(self::LOWEST_LOAD_ABOVE_FACTOR);
+        $host->shouldBe($host2);
     }
 }
